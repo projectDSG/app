@@ -62,8 +62,6 @@ public class MainActivity extends AppCompatActivity {
         charitiesStrings = (EditText)findViewById(R.id.charityStrings);
         businessStrings = (EditText)findViewById(R.id.businessStrings);
 
-//        final TextView urlCheck = findViewById(R.id.urlCheck);
-
         saveBtn = findViewById(R.id.saveBtn);
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,17 +70,11 @@ public class MainActivity extends AppCompatActivity {
                 petitions = petitionStrings.getText().toString();
                 charities = charitiesStrings.getText().toString();
                 businesses = businessStrings.getText().toString();
+                fullString = "Protests\n" + protests + "\n\nPetitions\n" + petitions + "\n\nCharities\n" + charities + "\n\nLocal Business\n" + businesses +"\n";
                 saveData();
 
             }
         });
-
-//        protests = protestStrings.getText().toString();
-//        petitions = petitionStrings.getText().toString();
-//        charities = charitiesStrings.getText().toString();
-//        businesses = businessStrings.getText().toString();
-
-        fullString = "Protests\n" + protests + "\n\nPetitions\n" + petitions + "\n\nCharities\n" + charities + "\n\nLocal Business\n" + businesses;
 
         qrCodeBtn = findViewById(R.id.qrCode);
         qrCodeBtn.setOnClickListener(new View.OnClickListener() {
@@ -113,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
 
         Toast.makeText(this,"Data saved", Toast.LENGTH_SHORT).show();
     }
+
     //Clears local data
     private  void clearData(){
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
@@ -140,30 +133,5 @@ public class MainActivity extends AppCompatActivity {
         petitionStrings.setText(text2);
         charitiesStrings.setText(text3);
         businessStrings.setText(text4);
-    }
-
-    public static String postToPaste(String infoToBePosted) {
-        PastebinFactory factory = new PastebinFactory();
-        Pastebin pastebin = factory.createPastebin(DEV_KEY);
-
-        final PasteBuilder pasteBuilder = factory.createPaste();
-
-        pasteBuilder.setTitle("projectDSG");
-        pasteBuilder.setRaw(infoToBePosted);
-        pasteBuilder.setMachineFriendlyLanguage("text");
-        pasteBuilder.setVisiblity(PasteVisiblity.Public);
-        pasteBuilder.setExpire(PasteExpire.OneDay);
-
-        final Paste paste = pasteBuilder.build();
-
-        final Response<String> postResult = pastebin.post(paste);
-
-        if (postResult.hasError()) {
-            System.out.println("ERROR!!");
-            return postResult.getError();
-        }
-
-        System.out.println(postResult.get() + "********************************");
-        return postResult.get();
     }
 }

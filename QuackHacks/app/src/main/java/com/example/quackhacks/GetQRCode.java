@@ -34,7 +34,6 @@ public class GetQRCode extends AppCompatActivity {
         StrictMode.setThreadPolicy(policy);
 
         Intent intent = getIntent();
-
         String inputData = intent.getStringExtra("fullString");
         String pasteURL = postToPaste(inputData);
 
@@ -46,7 +45,7 @@ public class GetQRCode extends AppCompatActivity {
         web.getSettings().setLoadsImagesAutomatically(true);
         WebSettings webSettings = web.getSettings();
         webSettings.setJavaScriptEnabled(true);
-        web.loadUrl("https://api.qrserver.com/v1/create-qr-code/?data=" + inputData);//builds resolver url
+        web.loadUrl("https://api.qrserver.com/v1/create-qr-code/?data=" + pasteURL);//builds resolver url
 
 
     }
@@ -69,11 +68,9 @@ public class GetQRCode extends AppCompatActivity {
         final Response<String> postResult = pastebin.post(paste);
 
         if (postResult.hasError()) {
-            System.out.println("ERROR!!");
             return postResult.getError();
         }
 
-        System.out.println(postResult.get() + "********************************");
         return postResult.get();
     }
 

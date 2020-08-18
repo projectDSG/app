@@ -33,5 +33,5 @@ Modify the information fields to be less constrictive and give the user more fre
 Look into a server that would be able to host the information temporarily for a maximum of 12 hours instead of relying on Pastebin or another file hosting site to hold the user's information.
 Figure out a way to moderate content and filter our spam and misuse of the application.
 
-##Topic
+## Topic
 Education
